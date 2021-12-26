@@ -19,7 +19,9 @@ message("CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
 
 
 
-add_executable(main main.cpp)
+add_executable(main 
+    src/main.cpp
+)
 
 
 # message("hello CMakeLists end")

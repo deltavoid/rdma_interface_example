@@ -46,11 +46,14 @@ int main(int argc, char** argv, char** env)
         [&io_context2]() {  io_context2.run();});
 
 
-    QpRequest request;
-    request._id = 1;
+    for (int i = 0; i < 3; i++)
+    {
+        QpRequest request;
+        request._id = i;
 
-    qp1.put_request(request);   
-
+        qp1.put_request(request);
+        sleep(1);
+    }
 
 
     thread1.join();

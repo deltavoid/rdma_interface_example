@@ -14,13 +14,14 @@
 
 
 
-QpRequestQueue::QpRequestQueue(IOContext* io_context)
+QpRequestQueue::QpRequestQueue(IOContext* io_context, CompletionQueue* cq)
 {
     _event_fd = eventfd(0, 0);
 
     pthread_spin_init(&_que_lock, 0);
 
     _io_context = io_context;
+    _cq = cq;
 
     _io_context->add_handler(_event_fd, EPOLLIN, this);
 
@@ -59,6 +60,8 @@ int QpRequestQueue::handle(uint32_t event)
             handle_request(request);
 
     } while(have_event);
+
+    return 0;
 }
 
 int QpRequestQueue::handle_request(QpRequest& request)

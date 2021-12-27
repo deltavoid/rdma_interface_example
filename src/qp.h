@@ -31,7 +31,7 @@ public:
     std::queue<QpRequest> _que;
 
     
-    QpRequestQueue(IOContext* io_context);
+    QpRequestQueue(IOContext* io_context, CompletionQueue* cq);
     virtual ~QpRequestQueue();
 
     virtual int handle(uint32_t event);

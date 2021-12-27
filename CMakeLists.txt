@@ -23,6 +23,7 @@ add_executable(main
     src/main.cpp
     src/io_context.cpp
     src/cq.cpp
+    src/qp.cpp
 )
 
 target_link_libraries(main

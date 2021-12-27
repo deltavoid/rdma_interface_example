@@ -16,7 +16,7 @@ public:
 };
 
 
-class CompletionQeuue;
+class CompletionQueue;
 
 class QpRequestQueue : public EpollHandler {
 public:

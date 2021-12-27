@@ -1,33 +1,44 @@
 #ifndef CQ_H
 #define CQ_H
 
+#include <pthread.h>
+
 #include <queue>
 
 #include "epoll_handler.h"
 
-
 class CompletionEvent {
 public:
 
-    int id;
+    int _id;
 
 };
 
 
+class IOContext;
+
 class CompletionQueue : public EpollHandler {
 public:
 
-    int event_fd;
-    std::queue<CompletionEvent> que;
+    IOContext* _io_context;
+    int _event_fd;
+
+    pthread_spinlock_t _que_lock;
+    std::queue<CompletionEvent> _que;
 
 
-    CompletionQueue();
+
+
+    CompletionQueue(IOContext* io_context);
     virtual ~CompletionQueue();
 
     virtual int handle(uint32_t event);    
 
 
     int put_event(CompletionEvent& event);
+
+    void notify();
+    void acknowledge();
 
 };
 

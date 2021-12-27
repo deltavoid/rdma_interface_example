@@ -22,7 +22,12 @@ message("CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
 add_executable(main 
     src/main.cpp
     src/io_context.cpp
+    src/cq.cpp
 )
 
+target_link_libraries(main
+    PRIVATE
+        -lpthread
+)
 
 # message("hello CMakeLists end")

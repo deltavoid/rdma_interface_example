@@ -55,8 +55,8 @@ int CompletionQueue::handle(uint32_t event)
 
         pthread_spin_unlock(&_que_lock);
 
-        
-        printf("CompletionQueue::handle, completion_event: %d\n", event._id);
+        if  (have_event)
+            printf("CompletionQueue::handle, completion_event: %d\n", event._id);
 
 
     } while(have_event);

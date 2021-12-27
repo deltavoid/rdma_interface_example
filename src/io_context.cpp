@@ -38,7 +38,8 @@ void IOContext::run()
 
     while (running)
     {
-        int num = epoll_wait(epoll_fd, internal_events, internal_event_num, 0);
+        int num = epoll_wait(epoll_fd, internal_events, internal_event_num, -1);
+        printf("IOContext::handle: epoll_wait ret num: %d\n", num);
         if  (num < 0)
             perror("epoll wait error");
 

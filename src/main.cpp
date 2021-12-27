@@ -1,6 +1,8 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include <unistd.h>
+
 #include <thread>
 #include <memory>
 
@@ -25,10 +27,16 @@ int main(int argc, char** argv, char** env)
     std::thread thread1 = std::thread(
         [&io_context1]() {  io_context1.run();});
 
-    CompletionEvent cq_event1;
-    cq_event1._id = 1;
 
-    cq1.put_event(cq_event1);
+    for (int i = 0; i < 3; i++)
+    {
+        CompletionEvent cq_event;
+        cq_event._id = i;
+
+        cq1.put_event(cq_event);
+        sleep(1);
+    }
+
     
 
     thread1.join();

@@ -32,7 +32,9 @@ public:
     CompletionQueue(IOContext* io_context);
     virtual ~CompletionQueue();
 
-    virtual int handle(uint32_t event);    
+    virtual int handle(uint32_t event);
+
+    int handle_event(CompletionEvent& event);
 
 
     int put_event(CompletionEvent& event);
